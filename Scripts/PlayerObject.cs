@@ -3,12 +3,15 @@ using System;
 
 public class PlayerObject : Area2D
 {
-    
+
+    [Signal]
+    private void hit;
+
     [Export]
     private int speed = 400;
     private Vector2 velocity;
     private Vector2 screenSize;
-    private bool monitoring    
+    private bool monitoring;    
     
 
     public AnimatedSprite playerAnimation;
@@ -55,9 +58,6 @@ public class PlayerObject : Area2D
             playerAnimation.Animation = "up";
             playerAnimation.FlipV = velocity.y > 0;
         }
-
-
-
     }
 
     public void OnPlayerBodyEntered(Area2D area)
