@@ -4,20 +4,21 @@ using System;
 public class PlayerObject : Area2D
 {
 
-    [Signal]
+/*     [Signal]
     private void hit;
-
+ */
     [Export]
     private int speed = 400;
     private Vector2 velocity;
     private Vector2 screenSize;
     private bool monitoring;    
     
-
     public AnimatedSprite playerAnimation;
 
     public override void _Ready()
     {
+        AddUserSignal("Hit");
+        Hide();
         screenSize = GetViewportRect().Size;
         playerAnimation = GetNode("AnimatedSprite") as AnimatedSprite;
     }
@@ -63,11 +64,11 @@ public class PlayerObject : Area2D
     public void OnPlayerBodyEntered(Area2D area)
     {
         Hide();
-        EmitSignal("hit");
+        EmitSignal("Hit");
         CallDeferred("set_monitoring", false);
     }
 
-    public void start(Vector2 pos)
+    public void Start(Vector2 pos)
     {
         SetPosition(pos);
         Show();
