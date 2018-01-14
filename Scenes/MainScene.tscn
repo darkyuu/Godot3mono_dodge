@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/MainScene.cs" type="Script" id=1]
 [ext_resource path="res://GameObjects/MobObject.tscn" type="PackedScene" id=2]
 [ext_resource path="res://GameObjects/PlayerObject.tscn" type="PackedScene" id=3]
+[ext_resource path="res://GameObjects/HUDObject.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Curve2D" id=1]
 
@@ -61,5 +62,13 @@ rotate = true
 cubic_interp = true
 loop = true
 lookahead = 4.0
+
+[node name="HUD" parent="." index="6" instance=ExtResource( 4 )]
+
+[connection signal="timeout" from="MobTimer" to="." method="OnMobTimerTimeout"]
+
+[connection signal="timeout" from="ScoreTimer" to="." method="OnScoreTimerTimeout"]
+
+[connection signal="timeout" from="StartTimer" to="." method="OnStartTimerTimeout"]
 
 

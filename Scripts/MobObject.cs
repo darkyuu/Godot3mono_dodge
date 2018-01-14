@@ -4,9 +4,9 @@ using System;
 public class MobObject : RigidBody2D
 {
     [Export]
-    private int minSpeed;
+    public int minSpeed;
     [Export]
-    private int maxSpeed;
+    public int maxSpeed;
     private string[] mobTypes;
     private AnimatedSprite mobAnimation;
     private Random randomGenerator;
@@ -27,11 +27,4 @@ public class MobObject : RigidBody2D
     {
         QueueFree();
     }
-
-//    public override void _Process(float delta)
-//    {
-//        // Called every frame. Delta is time since last frame.
-//        // Update game logic here.
-//        
-//    }
 }

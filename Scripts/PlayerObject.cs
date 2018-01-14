@@ -1,23 +1,22 @@
 using Godot;
 using System;
+using GodotCSTools;
 
 public class PlayerObject : Area2D
 {
-
-/*     [Signal]
-    private void hit;
- */
+    [Signal]
+    public delegate void Hit();
     [Export]
     private int speed = 400;
     private Vector2 velocity;
     private Vector2 screenSize;
     private bool monitoring;    
-    
-    public AnimatedSprite playerAnimation;
+    private AnimatedSprite playerAnimation;
 
     public override void _Ready()
     {
-        AddUserSignal("Hit");
+        this.SetupNodeTools();
+
         Hide();
         screenSize = GetViewportRect().Size;
         playerAnimation = GetNode("AnimatedSprite") as AnimatedSprite;
@@ -64,7 +63,7 @@ public class PlayerObject : Area2D
     public void OnPlayerBodyEntered(Area2D area)
     {
         Hide();
-        EmitSignal("Hit");
+        this.EmitSignal<Hit>();
         CallDeferred("set_monitoring", false);
     }
 
