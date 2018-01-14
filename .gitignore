@@ -2,6 +2,6 @@
 # Godot 3 Generated Folders and Files #
 ######################
 .import
-.mono/temp
+.mono/
 logs/
 *.suo
