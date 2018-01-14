@@ -13,14 +13,15 @@ public class MobObject : RigidBody2D
 
     public override void _Ready()
     {
+        mobTypes = new string[3];
         mobTypes[0] = "fly";
         mobTypes[1] = "swim"; 
         mobTypes[2] = "walk";
 
         randomGenerator = new Random();
-
         mobAnimation = GetNode("AnimatedSprite") as AnimatedSprite;
-        mobAnimation.Animation = mobTypes[randomGenerator.Next(0,mobTypes.Length-1)]; 
+        int typeIndex = randomGenerator.Next(0,mobTypes.Length-1);
+        mobAnimation.Animation = mobTypes[typeIndex]; 
     }
 
     public void OnVisibilityNotifier2DScreenExited()

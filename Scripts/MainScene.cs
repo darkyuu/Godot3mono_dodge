@@ -15,10 +15,11 @@ public class MainScene : Node
 	private Timer mobTimer;
     private PathFollow2D mobSpawnLocation;
     private HUDObject hud;
+    private AudioStreamPlayer deathSound;
+    private AudioStreamPlayer music;
 
     public override void _Ready()
     {
-        randomGenerator = new Random();
         player = GetNode("Player") as PlayerObject;
         startPosition = GetNode("StartPosition") as Position2D;
         startTimer = GetNode("StartTimer") as Timer;
@@ -26,39 +27,44 @@ public class MainScene : Node
 		mobTimer = GetNode("MobTimer") as Timer;
         mobSpawnLocation = GetNode("MobPath").GetNode("MobSpawnLocation") as PathFollow2D;
         hud = GetNode("HUD") as HUDObject;
+        deathSound = GetNode("DeathSound") as AudioStreamPlayer;
+        music = GetNode("Music") as AudioStreamPlayer;
 
         hud.Connect("StartGame",this, "NewGame");
         player.Connect("Hit",this, "GameOver");
+
+        randomGenerator = new Random();
     }
 
     public void NewGame()
     {
-        GD.Print("NewGame()");
         score = 0;
+        hud.UpdateScore(score);
         player.Start(startPosition.Position);
         startTimer.Start();
         hud.ShowMessage("Get Ready");
-        hud.UpdateScore(score);
+        music.Play();
     }
 	
 	public void GameOver()
 	{
-        GD.Print("GameOver()");
+        deathSound.Play();
+        music.Stop();
 		scoreTimer.Stop();
 		mobTimer.Stop();
         hud.GameOver();
+        
+
 	}
 
     public void OnStartTimerTimeout()
     {
-        GD.Print("OnStartTimerTimeout()");
         mobTimer.Start();
         scoreTimer.Start();
     }
 
     public void OnScoreTimerTimeout()
     {
-        GD.Print("OnScoreTimerTimeout()");
         score += 1;
         hud.UpdateScore(score);
     }
@@ -67,6 +73,8 @@ public class MainScene : Node
     {
         mobSpawnLocation.SetOffset(randomGenerator.Next());
         MobObject mobObject = (MobObject)mob.Instance();
+
+
         AddChild(mobObject);
         var direction = mobSpawnLocation.GetRotation();
         mobObject.SetPosition(mobSpawnLocation.GetPosition());

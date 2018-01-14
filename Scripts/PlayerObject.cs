@@ -12,14 +12,19 @@ public class PlayerObject : Area2D
     private Vector2 screenSize;
     private bool monitoring;    
     private AnimatedSprite playerAnimation;
+    private CollisionShape2D collision;
+    private Particles2D trail;
 
     public override void _Ready()
     {
         this.SetupNodeTools();
 
+        collision = GetNode("CollisionShape2D") as CollisionShape2D;
+        playerAnimation = GetNode("AnimatedSprite") as AnimatedSprite;
+        trail = GetNode("Trail") as Particles2D;
+
         Hide();
         screenSize = GetViewportRect().Size;
-        playerAnimation = GetNode("AnimatedSprite") as AnimatedSprite;
     }
 
     public override void _Process(float delta)
@@ -37,11 +42,13 @@ public class PlayerObject : Area2D
         if(velocity.Length() > 0.0f)
         {
             playerAnimation.Play();
+            trail.Emitting = true;
             velocity = velocity.Normalized() * speed;
         }
         else
         {
             playerAnimation.Stop();
+            trail.Emitting = false;
         }
 
         Position += velocity * delta; 
@@ -62,15 +69,15 @@ public class PlayerObject : Area2D
 
     public void OnPlayerBodyEntered(Area2D area)
     {
+        collision.Disabled = true;
         Hide();
         this.EmitSignal<Hit>();
-        CallDeferred("set_monitoring", false);
     }
 
     public void Start(Vector2 pos)
     {
         SetPosition(pos);
         Show();
-        monitoring = true;
+        collision.Disabled = false;
     }
 }
