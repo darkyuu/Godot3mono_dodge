@@ -74,9 +74,15 @@ public class MainScene : Node
         double b = Math.PI/4.0f;
         GD.Print("a:" + a);
         GD.Print("b:" + b);
-        direction += (float)randomGenerator.Next((int)a, (int)b);
+//        direction += (float)randomGenerator.Next((int)a, (int)b);
+        direction += (float)RandomRange(a, b);
         mobObject.SetRotation(direction);
         Vector2 linearVelocity = new Vector2(randomGenerator.Next(mobObject.minSpeed, mobObject.maxSpeed), 0);
         mobObject.SetLinearVelocity(linearVelocity.Rotated(direction));
+    }
+
+    private double RandomRange(double fromValue, double toValue)
+    {
+        return randomGenerator.NextDouble() * (toValue - fromValue) + fromValue;
     }
 }
