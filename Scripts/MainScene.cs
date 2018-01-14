@@ -70,12 +70,7 @@ public class MainScene : Node
         AddChild(mobObject);
         var direction = mobSpawnLocation.GetRotation();
         mobObject.SetPosition(mobSpawnLocation.GetPosition());
-        double a = -Math.PI/4.0f;
-        double b = Math.PI/4.0f;
-        GD.Print("a:" + a);
-        GD.Print("b:" + b);
-//        direction += (float)randomGenerator.Next((int)a, (int)b);
-        direction += (float)RandomRange(a, b);
+        direction += (float)RandomRange(-Math.PI/4.0, Math.PI/4.0);
         mobObject.SetRotation(direction);
         Vector2 linearVelocity = new Vector2(randomGenerator.Next(mobObject.minSpeed, mobObject.maxSpeed), 0);
         mobObject.SetLinearVelocity(linearVelocity.Rotated(direction));
