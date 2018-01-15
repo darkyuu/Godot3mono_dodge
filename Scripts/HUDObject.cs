@@ -33,14 +33,6 @@ public class HUDObject : CanvasLayer
     {
         ShowMessage("Game Over");
         ShowMainMenuHUDAfterGameOverMessageIsGone();
-
-        /*
-        ShowMessage("Game Over");
-        //TODO: find C# api:  yield(messageTimer, "Timeout");
-        startButton.Show();
-        messageLabel.Text = "Dodge the\nCreeps!";
-        messageLabel.Show();  
-        */
     }
 
     public void UpdateScore(int score)

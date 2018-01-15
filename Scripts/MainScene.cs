@@ -73,8 +73,6 @@ public class MainScene : Node
     {
         mobSpawnLocation.SetOffset(randomGenerator.Next());
         MobObject mobObject = (MobObject)mob.Instance();
-
-
         AddChild(mobObject);
         var direction = mobSpawnLocation.GetRotation();
         mobObject.SetPosition(mobSpawnLocation.GetPosition());

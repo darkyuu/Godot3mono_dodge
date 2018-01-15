@@ -7,19 +7,15 @@ public class MobObject : RigidBody2D
     public int minSpeed;
     [Export]
     public int maxSpeed;
-    private string[] mobTypes;
+    private static readonly string[] mobTypes = { "fly", "swim", "walk"};
     private AnimatedSprite mobAnimation;
     private Random randomGenerator;
 
     public override void _Ready()
     {
-        mobTypes = new string[3];
-        mobTypes[0] = "fly";
-        mobTypes[1] = "swim"; 
-        mobTypes[2] = "walk";
+        mobAnimation = GetNode("AnimatedSprite") as AnimatedSprite;
 
         randomGenerator = new Random();
-        mobAnimation = GetNode("AnimatedSprite") as AnimatedSprite;
         int typeIndex = randomGenerator.Next(0,mobTypes.Length-1);
         mobAnimation.Animation = mobTypes[typeIndex]; 
     }
