@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 using GodotCSTools;
 
 public class HUDObject : CanvasLayer
@@ -8,7 +9,7 @@ public class HUDObject : CanvasLayer
     public delegate void StartGame();
     private Label messageLabel;
     private Label scoreLabel;
-    private Timer messageTimer;
+    private Godot.Timer messageTimer;
     private Button startButton;
 
     public override void _Ready()
@@ -17,7 +18,7 @@ public class HUDObject : CanvasLayer
 
         messageLabel = GetNode("MessageLabel") as Label;
         scoreLabel =  GetNode("ScoreLabel") as Label;
-        messageTimer = GetNode("MessageTimer") as Timer;
+        messageTimer = GetNode("MessageTimer") as Godot.Timer;
         startButton = GetNode("StartButton") as Button;
     }
 
@@ -31,10 +32,15 @@ public class HUDObject : CanvasLayer
     public void GameOver()
     {
         ShowMessage("Game Over");
+        ShowMainMenuHUDAfterGameOverMessageIsGone();
+
+        /*
+        ShowMessage("Game Over");
         //TODO: find C# api:  yield(messageTimer, "Timeout");
         startButton.Show();
         messageLabel.Text = "Dodge the\nCreeps!";
         messageLabel.Show();  
+        */
     }
 
     public void UpdateScore(int score)
@@ -52,4 +58,25 @@ public class HUDObject : CanvasLayer
         startButton.Hide();
         this.EmitSignal<StartGame>();
     }
+
+    private async void ShowMainMenuHUDAfterGameOverMessageIsGone()
+    {
+        int result = await Task.Run(() => DidGameOverMessageTimeout());
+        if(result == 1)
+        {
+            startButton.Show();
+            messageLabel.Text = "Dodge the\nCreeps!";
+            messageLabel.Show();
+        }
+    }
+
+    private int DidGameOverMessageTimeout()
+    {
+        while(true)
+        {
+            if(!messageLabel.IsVisible())
+                return 1;
+        }
+    }
+
 }
