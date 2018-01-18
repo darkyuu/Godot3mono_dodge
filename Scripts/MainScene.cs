@@ -53,8 +53,6 @@ public class MainScene : Node
 		scoreTimer.Stop();
 		mobTimer.Stop();
         hud.GameOver();
-        
-
 	}
 
     public void OnStartTimerTimeout()
