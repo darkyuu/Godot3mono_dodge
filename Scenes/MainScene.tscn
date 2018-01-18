@@ -29,6 +29,7 @@ margin_right = 484.0
 margin_bottom = 725.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.227098, 0.42102, 0.480392, 1 )
@@ -80,6 +81,8 @@ loop = true
 lookahead = 4.0
 
 [node name="HUD" parent="." index="7" instance=ExtResource( 4 )]
+
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="." index="8"]
 
