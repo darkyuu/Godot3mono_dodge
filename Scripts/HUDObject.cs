@@ -53,22 +53,9 @@ public class HUDObject : CanvasLayer
 
     private async void ShowMainMenuHUDAfterGameOverMessageIsGone()
     {
-        int result = await Task.Run(() => DidGameOverMessageTimeout());
-        if(result == 1)
-        {
-            startButton.Show();
-            messageLabel.Text = "Dodge the\nCreeps!";
-            messageLabel.Show();
-        }
+        await ToSignal(messageTimer, "timeout");
+        startButton.Show();
+        messageLabel.Text = "Dodge the\nCreeps!";
+        messageLabel.Show();
     }
-
-    private int DidGameOverMessageTimeout()
-    {
-        while(true)
-        {
-            if(!messageLabel.IsVisible())
-                return 1;
-        }
-    }
-
 }
