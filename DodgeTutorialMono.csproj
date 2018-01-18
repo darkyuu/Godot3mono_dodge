@@ -47,7 +47,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="GodotCSTools">
-      <HintPath>packages\GodotCSTools.1.0.0-beta3\lib\net45\GodotCSTools.dll</HintPath>
+      <HintPath>packages\GodotCSTools.1.0.0-beta6\lib\net45\GodotCSTools.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
