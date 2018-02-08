@@ -38,6 +38,10 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GodotCSTools, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\GodotCSTools.1.0.0-beta8\lib\net45\GodotCSTools.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="GodotSharp">
       <HintPath>$(ProjectDir)\.mono\assemblies\GodotSharp.dll</HintPath>
       <Private>False</Private>
@@ -45,9 +49,6 @@
     <Reference Include="GodotSharpEditor" Condition=" '$(Configuration)' == 'Tools' ">
       <HintPath>$(ProjectDir)\.mono\assemblies\GodotSharpEditor.dll</HintPath>
       <Private>False</Private>
-    </Reference>
-    <Reference Include="GodotCSTools">
-      <HintPath>packages\GodotCSTools.1.0.0-beta6\lib\net45\GodotCSTools.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
@@ -57,6 +58,9 @@
     <Compile Include="Scripts\MainScene.cs" />
     <Compile Include="Scripts\MobObject.cs" />
     <Compile Include="Scripts\PlayerObject.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
