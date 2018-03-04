@@ -5,6 +5,7 @@ public class MainScene : Node
 {
     [Export]
     private PackedScene mob;
+	
     private int score;
     private Random randomGenerator;
     private PlayerObject player;
