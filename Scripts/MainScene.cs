@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using GodotCSTools;
 
 public class MainScene : Node
 {
@@ -23,8 +22,8 @@ public class MainScene : Node
         player = GetNode("Player") as PlayerObject;
         startPosition = GetNode("StartPosition") as Position2D;
         startTimer = GetNode("StartTimer") as Timer;
-		scoreTimer = GetNode("ScoreTimer") as Timer;
-		mobTimer = GetNode("MobTimer") as Timer;
+        scoreTimer = GetNode("ScoreTimer") as Timer;
+        mobTimer = GetNode("MobTimer") as Timer;
         mobSpawnLocation = GetNode("MobPath").GetNode("MobSpawnLocation") as PathFollow2D;
         hud = GetNode("HUD") as HUDObject;
         deathSound = GetNode("DeathSound") as AudioStreamPlayer;
@@ -50,8 +49,8 @@ public class MainScene : Node
 	{
         deathSound.Play();
         music.Stop();
-		scoreTimer.Stop();
-		mobTimer.Stop();
+        scoreTimer.Stop();
+        mobTimer.Stop();
         hud.GameOver();
 	}
 

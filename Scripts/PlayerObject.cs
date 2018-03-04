@@ -1,13 +1,14 @@
 using Godot;
 using System;
-using GodotCSTools;
 
 public class PlayerObject : Area2D
 {
     [Signal]
     public delegate void Hit();
+	
     [Export]
     private int speed = 400;
+	
     private Vector2 velocity;
     private Vector2 screenSize;
     private bool monitoring;    
@@ -17,8 +18,6 @@ public class PlayerObject : Area2D
 
     public override void _Ready()
     {
-        this.SetupNodeTools();
-
         collision = GetNode("CollisionShape2D") as CollisionShape2D;
         playerAnimation = GetNode("AnimatedSprite") as AnimatedSprite;
         trail = GetNode("Trail") as Particles2D;
@@ -71,7 +70,7 @@ public class PlayerObject : Area2D
     {
         collision.Disabled = true;
         Hide();
-        this.EmitSignal<Hit>();
+        this.EmitSignal("Hit");
     }
 
     public void Start(Vector2 pos)

@@ -14,7 +14,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -0.633972, -0.499876, 0, 0, 0, 0, 478.674, -0.499876, 0, 0, 0, 0, 478.674, 719.388, 0, 0, 0, 0, -0.633972, 719.388, 0, 0, 0, 0, -0.633972, -0.499876 )
 }
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" index="0"]
 
 script = ExtResource( 1 )
 mob = ExtResource( 2 )
@@ -28,6 +28,7 @@ anchor_bottom = 0.0
 margin_right = 484.0
 margin_bottom = 725.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -66,6 +67,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="MobPath" type="Path2D" parent="." index="6"]
 
+editor/display_folded = true
 curve = SubResource( 1 )
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" index="0"]
@@ -81,8 +83,6 @@ loop = true
 lookahead = 4.0
 
 [node name="HUD" parent="." index="7" instance=ExtResource( 4 )]
-
-transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="." index="8"]
 

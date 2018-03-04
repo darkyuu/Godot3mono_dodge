@@ -1,12 +1,13 @@
 using Godot;
 using System;
 using System.Threading.Tasks;
-using GodotCSTools;
+
 
 public class HUDObject : CanvasLayer
 {
-    [Signal("StartGame")]
+	[Signal]
     public delegate void StartGame();
+	
     private Label messageLabel;
     private Label scoreLabel;
     private Godot.Timer messageTimer;
@@ -14,8 +15,6 @@ public class HUDObject : CanvasLayer
 
     public override void _Ready()
     {
-        this.SetupNodeTools();
-
         messageLabel = GetNode("MessageLabel") as Label;
         scoreLabel =  GetNode("ScoreLabel") as Label;
         messageTimer = GetNode("MessageTimer") as Godot.Timer;
@@ -48,7 +47,7 @@ public class HUDObject : CanvasLayer
     public void OnStartButtonPressed()
     {
         startButton.Hide();
-        this.EmitSignal<StartGame>();
+        this.EmitSignal("StartGame");
     }
 
     private async void ShowMainMenuHUDAfterGameOverMessageIsGone()
